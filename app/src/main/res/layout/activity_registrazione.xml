@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/accesso_background"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:textColor="#D2F9FF"
+                android:shadowColor="#D2F9FF"
+                android:shadowDx="0"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:fontFamily="@font/winkyroughregular"
+                android:text="REGISTRATI"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_marginTop="-10dp"
+                android:src="@drawable/account_circle" />
+
+            <AutoCompleteTextView
+                android:id="@+id/actvScegliCitta1"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:hint="Seleziona la tua città"
+                android:background="@drawable/bordi_tondi_sfondo"
+                android:padding="12dp"
+                android:textColor="#181818"
+                android:textSize="18sp"
+                android:inputType="none"
+                android:focusable="false"
+                android:clickable="true"
+                android:drawableEnd="@drawable/icona_freccia_giu"
+                android:dropDownHeight="wrap_content" />
+
+            <EditText
+                android:id="@+id/etNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bordi_tondi"
+                android:hint="Nome"
+                android:inputType="text"
+                android:padding="18dp"
+                android:textColor="@color/black"
+                android:textColorHint="#737373"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/etCognome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bordi_tondi"
+                android:hint="Cognome"
+                android:inputType="text"
+                android:padding="18dp"
+                android:textColor="@color/black"
+                android:textColorHint="#737373"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bordi_tondi"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:padding="18dp"
+                android:textColor="@color/black"
+                android:textColorHint="#737373"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/etDataNascita"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bordi_tondi"
+                android:hint="Data di nascita"
+                android:inputType="date"
+                android:padding="18dp"
+                android:textColor="@color/black"
+                android:textColorHint="#737373"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bordi_tondi"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="18dp"
+                android:textColor="@color/black"
+                android:textColorHint="#737373"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/etConfermaPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bordi_tondi"
+                android:hint="Conferma Password"
+                android:inputType="textPassword"
+                android:padding="18dp"
+                android:textColor="@color/black"
+                android:textColorHint="#737373"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/btnRegistrazione"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#05A3CA"
+                android:padding="18dp"
+                android:text="Registrati"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvVaiAlLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Sei già registrato?  Vai al Login"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

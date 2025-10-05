@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "847531687398",
+    "project_id": "fitgymproject",
+    "storage_bucket": "fitgymproject.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847531687398:android:b54be8468b5f414373ea27",
+        "android_client_info": {
+          "package_name": "com.example.fitgym"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_0m44tO0aprYPmDjvyRSPgvkDFG--CFI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

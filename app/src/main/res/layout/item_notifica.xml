@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:background="#E7B15D"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:orientation="horizontal"
+        android:background="@drawable/contorno_bianco">
+
+        <LinearLayout
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvTitoloNotifica"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Titolo notifica"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/tvMessaggioNotifica"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Messaggio notifica"
+                android:textSize="20sp"
+                android:paddingTop="4dp"/>
+
+            <TextView
+                android:id="@+id/tvDataNotifica"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                android:paddingTop="4dp"/>
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/ibElimina"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="25dp"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:src="@drawable/icona_elimina" />
+
+    </LinearLayout>
+
+</RelativeLayout>
