@@ -27,7 +27,6 @@ class ReminderWorker(context: Context, params: WorkerParameters) : Worker(contex
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(applicationContext, android.Manifest.permission.POST_NOTIFICATIONS)
                 != PackageManager.PERMISSION_GRANTED) {
-                // Non può chiedere permesso da Worker, salta la notifica
                 return Result.failure()
             }
         }

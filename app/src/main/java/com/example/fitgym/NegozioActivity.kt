@@ -300,6 +300,7 @@ class NegozioActivity : AppCompatActivity() {
     }
 
 
+    // Mostra una piccola schermata per la ricarica
     private fun mostraDialogRicarica() {
 
         val inflater = layoutInflater

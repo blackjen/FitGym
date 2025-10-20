@@ -56,7 +56,7 @@ class CorsiActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_corsi)
 
-        // GESTIONE PERMESSI NOTIFICHE ANDROID 13+
+        // Gestione permessi notifiche (chiede il permesso per mostrare notifiche se android è 13+)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(
                     this,
@@ -135,6 +135,7 @@ class CorsiActivity : AppCompatActivity() {
         }
     }
 
+    // Genera la lista effettiva dei corsi, mostrandola nell'interfaccia (chiamando tutte le altre funzioni)
     private fun caricaCorsiFiltrati() {
         caricaCorsiBaseDaFirestore { corsi ->
             corsiBase = corsi
@@ -150,7 +151,7 @@ class CorsiActivity : AppCompatActivity() {
         }
     }
 
-
+    // Crea una lista di oggetti CorsoBase, leggendoli da firebase
     private fun caricaCorsiBaseDaFirestore(onComplete: (List<CorsoBase>) -> Unit) {
         db.collection("corsi_base").get()
             .addOnSuccessListener { snapshot ->
@@ -180,6 +181,7 @@ class CorsiActivity : AppCompatActivity() {
             }
     }
 
+    // Restituisce una lista di oggetti CorsoData (corsi completi) da oggi a 3 settimane
     private fun generaCorsiDaBase(corsiBase: List<CorsoBase>, settimane: Int): List<CorsoData> {
 
         val oggi = LocalDate.now()
@@ -207,6 +209,7 @@ class CorsiActivity : AppCompatActivity() {
         return lista
     }
 
+    // Elimina dalla lista i corsi con data passata
     private fun filtraCorsiValidi(lista: List<CorsoData>): List<CorsoData> {
         val oggi = LocalDate.now()
         val oraCorrente = LocalTime.now()
@@ -230,6 +233,7 @@ class CorsiActivity : AppCompatActivity() {
     }
 
 
+    // Se sono stati filtrati alcuni corsi, ne genera altrettanti per arrivare alle 3 settimane successive
     private fun generaCorsiInCoda(corsiBase: List<CorsoBase>, quanti: Int): List<CorsoData> {
         val oggi = LocalDate.now()
         val lista = mutableListOf<CorsoData>()
@@ -261,6 +265,7 @@ class CorsiActivity : AppCompatActivity() {
         return lista
     }
 
+    // Ordina i corsi per data crescente, poi per orario.
     private fun ordinaCorsi(corsi: MutableList<CorsoData>) {
         val formatter = java.time.format.DateTimeFormatter.ofPattern("HH:mm")
 
@@ -269,11 +274,13 @@ class CorsiActivity : AppCompatActivity() {
                 try {
                     LocalTime.parse(corso.orario, formatter)
                 } catch (e: Exception) {
-                    LocalTime.MIDNIGHT // Se l'orario è invalido, lo considera 00:00
+                    LocalTime.MIDNIGHT // Se l'orario non è valido, lo considera 00:00
                 }
             })
     }
 
+    // Legge da firebase la lista dei corsi a cui è iscritto l'utente, aggiorna l'interfaccia e
+    // programma i reminder per i corsi iscritti
     private fun caricaIscrizioni(corsi: MutableList<CorsoData>) {
         val utente = auth.currentUser?.uid ?: return
         db.collection("utenti").document(utente).get()
@@ -285,13 +292,14 @@ class CorsiActivity : AppCompatActivity() {
                 }
                 adapter.notifyDataSetChanged()
 
-                // Schedula i reminder per tutti i corsi già iscritti
+                // Programma i reminder per tutti i corsi a cui l'utente è iscritto
                 corsi.filter { it.iscritto }.forEach { corso ->
                     programmaReminder(corso)
                 }
             }
     }
 
+    // Aggiunge/Elimina i corsi dalla lista corsiIscritti
     private fun aggiornaIscrizione(corsi: MutableList<CorsoData>, position: Int) {
         val utente = auth.currentUser?.uid ?: return
         val corso = corsi[position]
@@ -322,6 +330,7 @@ class CorsiActivity : AppCompatActivity() {
             }
     }
 
+    // Crea una notifica all'iscrizione/disiscrizione di un corso
     private fun aggiornaNotifiche(corso: CorsoData, isIscritto: Boolean) {
         val utente = auth.currentUser?.uid ?: return
         val titolo = if (isIscritto) "DISISCRIZIONE CORSO" else "ISCRIZIONE CORSO"
@@ -341,6 +350,7 @@ class CorsiActivity : AppCompatActivity() {
             .update("notifiche", com.google.firebase.firestore.FieldValue.arrayUnion(nuovaNotifica))
     }
 
+    // Elimina dalla lista corsiIscritti, i corsi che sono passati
     private fun pulisciIscrizioniScadute() {
         val utente = auth.currentUser?.uid ?: return
         val oggi = LocalDate.now()
@@ -384,6 +394,7 @@ class CorsiActivity : AppCompatActivity() {
             }
     }
 
+    // Crea il canale per Android NotificationManager
     private fun creaCanaleNotifiche() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "Promemoria Corsi"
@@ -397,6 +408,8 @@ class CorsiActivity : AppCompatActivity() {
         }
     }
 
+    // Genera una notifica quando manca 1 ora dall'inizio di un corso a cui si è iscritti
+    // Usa WorkManager per programmare il lavoro in background.
     fun programmaReminder(corso: CorsoData) {
         if (!corso.iscritto) return
 
@@ -428,5 +441,3 @@ class CorsiActivity : AppCompatActivity() {
 
 
 }
-
-
